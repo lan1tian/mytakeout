@@ -10,16 +10,25 @@
           <span class="name">{{ seller.name }}</span>
         </div>
         <div class="description">蜂鸟专送/38分钟送达</div>
-        <div v-if="true" class="support">
+        <div v-if="seller.supports" class="support">
           <support-ico :size="1" :type="seller.supports[0].type"></support-ico>
           <span class="text">{{ seller.supports[0].description }}</span>
         </div>
       </div>
+      <div v-if="seller.supports" class="support-count">
+        <span class="count">{{ seller.supports.length }}个</span>
+        <i class="icon-keyboard_arrow_right"></i>
+      </div>
+    </div>
+    <div class="background">
+      <img :src="seller.avatar" width="100%" height="100%" />
     </div>
   </div>
 </template>
 
 <script>
+import SupportIco from 'components/support-ico/support-ico'
+
 export default {
   name: 'v-header',
   props: {
@@ -79,12 +88,16 @@ export default {
         }
       }
     }
+  },
+  methods: {},
+  components: {
+    SupportIco
   }
 }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-@import 'common/stylus/variable'
+@import '~common/stylus/variable'
 
 .header
   position: relative;
@@ -98,6 +111,7 @@ export default {
     .avatar
       flex: 0 0 64px;
       width: 64px ;
+      margin-right: 16px
       img
         border-radius: 2px ;
     .content
@@ -105,10 +119,47 @@ export default {
       .title
         display: flex
         align-items: center
-        bg-image('brand')
-        background-size: 30px 18px
-        background-repeat: no-repeat
-      .name
-        margin-left: 6px
-        font-size: $fontsize-large
+        margin-bottom: 8px
+        .brand
+          width: 30px
+          height: 18px
+          bg-image('brand')
+          background-size: 30px 18px
+          background-repeat: no-repeat
+        .name
+          margin-left: 6px
+          font-size: $fontsize-large
+          font-weight: bold
+      .description
+        margin-bottom: 8px
+        line-height: 12px
+        font-size: $fontsize-small
+      .support
+        display: flex
+        align-items: center
+        .support-ico
+          margin-right: 4px
+        .text
+          line-height: 12px
+          font-size: $fontsize-small-s
+    .support-count
+        position: absolute
+        right: 12px
+        bottom: 14px
+        display: flex
+        align-items: center
+        padding: 0 8px
+        height: 24px
+        line-height: 24px
+        text-align: center
+        border-radius: 14px
+        background: $color-background-sss
+  .background
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      z-index: -1
+      filter: blur(10px)
 </style>

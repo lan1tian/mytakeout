@@ -20,6 +20,11 @@
         <i class="icon-keyboard_arrow_right"></i>
       </div>
     </div>
+    <div class="bulletin-wrapper" >
+      <span class="bulletin-title"></span>
+      <span class="bulletin-text">{{seller.bulletin}}</span>
+      <i class="icon-keyboard_arrow_right"></i>
+    </div>
     <div class="background">
       <img :src="seller.avatar" width="100%" height="100%" />
     </div>
@@ -154,6 +159,12 @@ export default {
         text-align: center
         border-radius: 14px
         background: $color-background-sss
+        .count
+          font-size: $fontsize-small-s
+        .icon-keyboard_arrow_right
+          margin-left: 2px
+          line-height: 24px
+          font-size: $fontsize-small-s
   .background
       position: absolute
       top: 0
@@ -162,4 +173,28 @@ export default {
       height: 100%
       z-index: -1
       filter: blur(10px)
+  .bulletin-wrapper
+    position: relative
+    display: flex
+    align-items: center
+    height: 28px
+    line-height: 28px
+    padding: 0 8px
+    background: $color-background-sss
+    .bulletin-title
+      flex: 0 0 22px
+      width: 22px
+      height: 12px
+      margin-right: 4px
+    .bulletin-text
+      flex: 1
+      // 不换行
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+      font-size: $fontsize-small-s
+    .icon-keyboard_arrow_right
+      flex: 0 0 10px
+      width: 10px
+      font-size: $fontsize-small-s
 </style>

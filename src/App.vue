@@ -2,13 +2,14 @@
   <div id="app">
     <v-header></v-header>
     <div class="tab-wrapper">
-      <tab :tabs="tabs" :initialIndex=0></tab>
+      <tab :tabs="tabs" :initialIndex="0"></tab>
     </div>
   </div>
 </template>
 
 <script>
 import VHeader from './components/v-header/v-header.vue'
+import Goods from './components/goods/goods.vue'
 import Seller from './components/seller/seller.vue'
 import Tab from 'components/tab/tab'
 
@@ -19,7 +20,7 @@ export default {
       return [
         {
           label: '商品',
-          component: Seller,
+          component: Goods,
           data: {
             seller: this.seller
           }

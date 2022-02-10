@@ -1,7 +1,7 @@
 <template>
   <div class="goods">
-    <div class="scroll-na-wrapper">
-      <cube-scroll-nav :side="true" :data="goods" :options="scrollOptions">
+    <div class="scroll-nav-wrapper">
+      <cube-scroll-nav :side="true" :data="goods" :options="scrollOptions" v-if="goods.length">
         <template slot="bar" slot-scope="props">
           <cube-scroll-nav-bar
             direction="vertical"
@@ -9,6 +9,20 @@
             :txts="barTxts"
             :current="props.current"
           >
+            <template slot='bar' slot-scope="props">
+              <div class="text">
+                <support-ico
+                  v-if="props.txt.type >= 1"
+                  :size="3"
+                  :type="props.txt.type"
+                >
+                </support-ico>
+                <span>{{ props.txt.name }}</span>
+                <span class="num" v-if="props.txt.count">
+                  <bubble :num="props.txt.count"></bubble>
+                </span>
+              </div>
+            </template>
           </cube-scroll-nav-bar>
         </template>
       </cube-scroll-nav>
@@ -17,7 +31,10 @@
 </template>
 
 <script>
+import SupportIco from '../support-ico/support-ico.vue'
+import Bubble from 'components/bubble/bubble'
 export default {
+  components: { SupportIco, Bubble },
   name: 'goods',
   props: {
     data: {
@@ -1229,8 +1246,43 @@ export default {
         directionLockThreshold: 0
       }
     }
+  },
+  computed: {
+    barTxts() {
+      let ret = []
+      this.goods.forEach((good) => {
+        const { type, name, foods } = good
+        let count = 0
+        foods.forEach((food) => {
+          count += food.count || 0
+        })
+        ret.push({
+          type,
+          name,
+          count
+        })
+      })
+      return ret
+    }
   }
 }
 </script>
 
-<style lang="stylus" scoped></style>
+<style lang="stylus" scoped>
+@import "~common/stylus/mixin"
+@import "~common/stylus/variable"
+
+.goods
+  position: relative
+  text-aligh: left
+  height: 100%
+  .scroll-nav-wrapper
+    position: absolute
+    width: 100%
+    top: 0
+    left: 0
+    bottom: 48px
+    .text
+      flex: 1
+      position: relative
+</style>

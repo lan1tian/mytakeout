@@ -1,6 +1,7 @@
 <template>
   <div class="tab">
-    <cube-tab-bar v-model="selectedLabel" :data="tabs" ref="tabBar"> </cube-tab-bar>
+    <cube-tab-bar v-model="selectedLabel" :data="tabs" ref="tabBar">
+    </cube-tab-bar>
     <div class="slide-wrapper">
       <cube-slide
         ref="slide"

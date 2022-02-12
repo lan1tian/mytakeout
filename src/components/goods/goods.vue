@@ -9,7 +9,7 @@
             :txts="barTxts"
             :current="props.current"
           >
-            <template slot='bar' slot-scope="props">
+            <template  slot-scope="props">
               <div class="text">
                 <support-ico
                   v-if="props.txt.type >= 1"
@@ -1274,14 +1274,25 @@ export default {
 
 .goods
   position: relative
-  text-aligh: left
+  // text-aligh: left
   height: 100%
   .scroll-nav-wrapper
     position: absolute
     width: 100%
     top: 0
     left: 0
-    bottom: 48px
+    // bottom: 48px
+  >>> .cube-scroll-nav-bar
+    width: 80px
+    white-space: normal
+    overflow: hidden
+  >>> .cube-scroll-nav-bar-item
+    padding: 0 10px
+    display: flex
+    height: 56px
+    line-height: 14px
+    font-size: $fontsize-small
+    background: $color-background-ssss
     .text
       flex: 1
       position: relative
